@@ -1,1 +1,5 @@
-# mg_gtm_guide
+# Track & Identify GTM Implementation Guide
+
+### Goal 
+
+### Steps 
