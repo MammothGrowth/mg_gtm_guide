@@ -4,5 +4,5 @@
 	  [key, value] = kv.split('=');
 	  qryParams[key] = value;
 	});
-	return qryParams."{replace_me}";
+	return qryParams."{ENTER KEY}";
 })()

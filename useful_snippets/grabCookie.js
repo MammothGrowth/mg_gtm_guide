@@ -6,8 +6,7 @@
 			return parts.pop().split(";").shift();
 		}
 	}
-	var products = ["{Array of acceptable values}"];
-	var product = getCookie('{Cookie_Name}');
-	if(products.indexOf(product) > -1){
-		return product;};
+	var data = getCookie('{Cookie_Name}');
+	if(data){
+		return data;};
 })();
