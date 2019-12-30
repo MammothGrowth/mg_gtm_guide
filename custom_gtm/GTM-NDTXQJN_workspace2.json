@@ -1,0 +1,210 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2019-12-30 16:07:39",
+    "containerVersion": {
+        "path": "accounts/6000309458/containers/30333094/versions/0",
+        "accountId": "6000309458",
+        "containerId": "30333094",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/6000309458/containers/30333094",
+            "accountId": "6000309458",
+            "containerId": "30333094",
+            "name": "datagata.com",
+            "publicId": "GTM-NDTXQJN",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1577712235055",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6000309458/containers/30333094/workspaces?apiLink=container"
+        },
+        "tag": [
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "tagId": "6",
+                "name": "MG - Attach Click Listener",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    // Use events from https://developer.mozilla.org/en-US/docs/Web/Events\n    var eventName = 'click';\n    \n    // Attach listener directly to element or document if element not found\n    var el = document.querySelector('body') || document;\n    \n    // Leave useCapture to true if you want to avoid propagation issues.\n    var useCapture = true;\n    \n    el.addEventListener(eventName, {{MG - Track Calls}}, useCapture);\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1577713916578",
+                "firingTriggerId": [
+                    "5"
+                ],
+                "parentFolderId": "3",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "tagId": "9",
+                "name": "MG - Attach Submit Listener",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    // Use events from https://developer.mozilla.org/en-US/docs/Web/Events\n    var eventName = 'submit';\n    \n    // Attach listener directly to element or document if element not found\n    var el = document.getElementById('{Form ID}') || document;\n    \n    // Leave useCapture to true if you want to avoid propagation issues.\n    var useCapture = true;\n    \n    el.addEventListener(eventName, {{MG - Identify Calls}}, useCapture);\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1577721702895",
+                "firingTriggerId": [
+                    "5"
+                ],
+                "parentFolderId": "3",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "triggerId": "5",
+                "name": "MG - Page View Trigger",
+                "type": "PAGEVIEW",
+                "fingerprint": "1577712538300",
+                "parentFolderId": "4"
+            }
+        ],
+        "variable": [
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "variableId": "8",
+                "name": "MG - Track Calls",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n  return function(event) {\n    var clickEl = event.target;\n    //Check if the clicked element matches the target button or the parent element matches\n    if((clickEl.matches('{CLICK ELEMENT}'))||(clickEl.closest('{PARENT ELEMENT}'))){\n        analytics.track('CTA Clicked', {\n          // Edit so that the CTA text is always captured\n          'CTA':clickEl.closest('{Enter CSS}').textContent || ''\n        })\n    }\n    //Check if the clicked element matches the target button or the parent element matches\n    else if((clickEl.matches('{CLICK ELEMENT}'))||(clickEl.closest('{PARENT ELEMENT}'))){\n        analytics.track('Nav Clicked', {\n          // Edit so that the selected Nav section name is always captured\n\t\t  'Nav':clickEl.closest('{Enter CSS}').textContent || ''\n        })\n      }\n    }\n  }"
+                    }
+                ],
+                "fingerprint": "1577722026497",
+                "parentFolderId": "7",
+                "formatValue": {}
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "variableId": "10",
+                "name": "MG - Identify Calls",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n  return function(event) {\n    var formEl = event.target;\n    //Check if the clicked element matches the target button or the parent element matches\n    if((formEl.matches('{CLICK ELEMENT}'))||(formEl.closest('{PARENT ELEMENT}'))){\n        //Grab email from form or user_id from \n        var identity = {{UserID}} || formEl.querySelector('{Enter_Email_Input_CSS}').value;\n        analytics.identify(identity, {\n          'email': formEl.querySelector('{Enter_Email_Input_CSS}').value,\n          'firstName': formEl.querySelector('{Enter_First_Name_Input_CSS}').value,\n          'lastName': formEl.querySelector('{Enter_Last_Name_Input_CSS}').value\n        })\n    }\n    //Check if the clicked element matches the target button or the parent element matches\n    else if((formEl.matches('{CLICK_ELEMENT}'))||(formEl.closest('{PARENT_ELEMENT}'))){\n        var identity = {{UserID}} || formEl.querySelector('{Enter_Email_Input_CSS}').value;\n        analytics.identify(identity, {\n          'email': formEl.querySelector('{Enter_Email_Input_CSS}').value,\n          'firstName': formEl.querySelector('{Enter_First_Name_Input_CSS}').value,\n          'lastName': formEl.querySelector('{Enter_Last_Name_Input_CSS}').value\n        })\n      }\n    }\n  }"
+                    }
+                ],
+                "fingerprint": "1577722037684",
+                "parentFolderId": "7",
+                "formatValue": {}
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "variableId": "11",
+                "name": "UserID",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "userId"
+                    }
+                ],
+                "fingerprint": "1577721886414",
+                "formatValue": {}
+            }
+        ],
+        "folder": [
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "folderId": "3",
+                "name": "MG - Tags",
+                "fingerprint": "1577712343472"
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "folderId": "4",
+                "name": "MG - Triggers",
+                "fingerprint": "1577712480919"
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "folderId": "7",
+                "name": "MG - Variables",
+                "fingerprint": "1577712569908"
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "type": "PAGE_URL",
+                "name": "Page URL"
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "type": "PAGE_HOSTNAME",
+                "name": "Page Hostname"
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "type": "PAGE_PATH",
+                "name": "Page Path"
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "type": "REFERRER",
+                "name": "Referrer"
+            },
+            {
+                "accountId": "6000309458",
+                "containerId": "30333094",
+                "type": "EVENT",
+                "name": "Event"
+            }
+        ],
+        "fingerprint": "1577722059690",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6000309458/containers/30333094/versions/0?apiLink=version"
+    }
+}
