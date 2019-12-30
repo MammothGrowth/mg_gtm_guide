@@ -32,7 +32,7 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 2. Once the gtm-container.json file is downloaded, navigate to the admin options in GTM
 3. Click Import Container
 * Select the 'gtm-container.json' file to upload
-* Select 'Merge' - This will add the tags, triggers, and variables from this file to your environment
+* Select 'Merge' - This will add the tags, triggers, and variables from this file to your environment without overwriting any work already done in your environment
 * Continue
 5. Navigate to Tags >> 'MG - Attach Click Listener'
 * This code should look familiar:) This code attaches the click event listener and provides the block of code that should run upon click
@@ -51,8 +51,8 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 * Because we've attached the 'click' event listener to the body of the document, we are going to check the element that was clicked against some elements that we want to track.
 * In this code, each if statement represents a unique track call that we want to make. The element the user clicked is stored in the variable clickEl, and we want to compare that element to some CSS to see if the clicked element is in fact the one we want to trigger a track call. IE. clickEl is the button a user clicked, and we want to compare that to the CSS of a button we want to track clicks of. 
 * Each value with brackets needs to be replaced with the CSS of elements you want to track. Example below.
-* [Find CSS w/ Devtools](http://www.abodeqa.com/inspecting-elements-for-writing-xpath-css-selector-in-chrome/)
-* [CSS Selector Cheat Sheet](https://www.web4college.com/questions/css-selectors-cheat-sheet.php)
+* [How to Find CSS w/ Devtools](http://www.abodeqa.com/inspecting-elements-for-writing-xpath-css-selector-in-chrome/) 
+* [CSS Selector Cheat Sheet](https://www.web4college.com/questions/css-selectors-cheat-sheet.php) 
 
 *Start*
 ```javascript
@@ -73,6 +73,6 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
         })
     }
 ```
-
+*It is important to note here that the "||"" characters mean or and is only necessary if a button contains child elements that a user could click on ie. an svg icon. In this situation, we'd want to compare against the parent element of the child to determine if a button we want to track was clicked*
 
 ### **Testing** 
