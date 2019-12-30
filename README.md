@@ -31,9 +31,9 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 1. Fork and Clone this Repo for client specific work
 2. Once the gtm-container.json file is downloaded, navigate to the admin options in GTM
 3. Click Import Container
-4. Select the 'gtm-container.json' file to upload
-5. Select 'Merge'
-* This will add the tags, triggers, and variables from this file to your environment
+* Select the 'gtm-container.json' file to upload
+* Select 'Merge' - This will add the tags, triggers, and variables from this file to your environment
+* Continue
 5. Navigate to Tags >> 'MG - Attach Click Listener'
 * This code should look familiar:) This code attaches the click event listener and provides the block of code that should run upon click
 * MG - Track Calls is that block of code which we've stored as a Variable
