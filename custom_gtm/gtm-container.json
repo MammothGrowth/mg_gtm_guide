@@ -1,6 +1,6 @@
 {
     "exportFormatVersion": 2,
-    "exportTime": "2019-12-30 16:07:39",
+    "exportTime": "2019-12-31 18:42:39",
     "containerVersion": {
         "path": "accounts/6000309458/containers/30333094/versions/0",
         "accountId": "6000309458",
@@ -92,7 +92,7 @@
                 "accountId": "6000309458",
                 "containerId": "30333094",
                 "variableId": "8",
-                "name": "MG - Track Calls",
+                "name": "MG - Click Events",
                 "type": "jsm",
                 "parameter": [
                     {
@@ -101,7 +101,7 @@
                         "value": "function() {\n  return function(event) {\n    var clickEl = event.target;\n    //Check if the clicked element matches the target button or the parent element matches\n    if((clickEl.matches('{CLICK ELEMENT}'))||(clickEl.closest('{PARENT ELEMENT}'))){\n        analytics.track('CTA Clicked', {\n          // Edit so that the CTA text is always captured\n          'CTA':clickEl.closest('{Enter CSS}').textContent || ''\n        })\n    }\n    //Check if the clicked element matches the target button or the parent element matches\n    else if((clickEl.matches('{CLICK ELEMENT}'))||(clickEl.closest('{PARENT ELEMENT}'))){\n        analytics.track('Nav Clicked', {\n          // Edit so that the selected Nav section name is always captured\n\t\t  'Nav':clickEl.closest('{Enter CSS}').textContent || ''\n        })\n      }\n    }\n  }"
                     }
                 ],
-                "fingerprint": "1577722026497",
+                "fingerprint": "1577815503038",
                 "parentFolderId": "7",
                 "formatValue": {}
             },
@@ -109,16 +109,16 @@
                 "accountId": "6000309458",
                 "containerId": "30333094",
                 "variableId": "10",
-                "name": "MG - Identify Calls",
+                "name": "MG - Form Submits",
                 "type": "jsm",
                 "parameter": [
                     {
                         "type": "TEMPLATE",
                         "key": "javascript",
-                        "value": "function() {\n  return function(event) {\n    var formEl = event.target;\n    //Check if the clicked element matches the target button or the parent element matches\n    if((formEl.matches('{CLICK ELEMENT}'))||(formEl.closest('{PARENT ELEMENT}'))){\n        //Grab email from form or user_id from \n        var identity = {{UserID}} || formEl.querySelector('{Enter_Email_Input_CSS}').value;\n        analytics.identify(identity, {\n          'email': formEl.querySelector('{Enter_Email_Input_CSS}').value,\n          'firstName': formEl.querySelector('{Enter_First_Name_Input_CSS}').value,\n          'lastName': formEl.querySelector('{Enter_Last_Name_Input_CSS}').value\n        })\n    }\n    //Check if the clicked element matches the target button or the parent element matches\n    else if((formEl.matches('{CLICK_ELEMENT}'))||(formEl.closest('{PARENT_ELEMENT}'))){\n        var identity = {{UserID}} || formEl.querySelector('{Enter_Email_Input_CSS}').value;\n        analytics.identify(identity, {\n          'email': formEl.querySelector('{Enter_Email_Input_CSS}').value,\n          'firstName': formEl.querySelector('{Enter_First_Name_Input_CSS}').value,\n          'lastName': formEl.querySelector('{Enter_Last_Name_Input_CSS}').value\n        })\n      }\n    }\n  }"
+                        "value": "function() {\n  return function(event) {\n    var formEl = event.target;\n    //Match the submitted form (formEl) against various form ID's so you know which one it is   \n    if(formEl.matches('{Form ID}')){\n        analytics.track('{Event Name}', {\n          // Replace these with event properties defined in the tracking plan\n          // Forms have input elements that are filled out prior to submission\n          // Find the CSS of each input you want to include as a property\n          'Property Name':formEl.querySelector('{Input CSS}').value || ''\n        })\n    }\n    //\n    else if(formEl.matches('{Form ID}')){\n        analytics.track('{Event Name}', {\n          // Replace these with event properties defined in the tracking plan\n          // Forms have input elements that are filled out prior to submission\n          // Find the CSS of each input you want to include as a property\n          'Property Name':formEl.querySelector('{Input CSS}').value || ''\n        })\n      }\n    }\n  }"
                     }
                 ],
-                "fingerprint": "1577722037684",
+                "fingerprint": "1577816767189",
                 "parentFolderId": "7",
                 "formatValue": {}
             },
@@ -204,7 +204,7 @@
                 "name": "Event"
             }
         ],
-        "fingerprint": "1577722059690",
+        "fingerprint": "1577817759080",
         "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6000309458/containers/30333094/versions/0?apiLink=version"
     }
 }
