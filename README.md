@@ -170,11 +170,13 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 *After*
 ```javascript
     else if(formEl.matches('#signup')){
-        analytics.identify({{email}},{
-          'firstName':{{firstName}},
-          'lastName':{{lastName}},
-          'email':{{email}}  
-        })
+        if({{email}}){
+            analytics.identify({{email}},{
+              'firstName':{{firstName}},
+              'lastName':{{lastName}},
+              'email':{{email}}  
+            })
+        }
         analytics.track('Signup Form Submitted', {
           'companySize':formEl.querySelector('.company-size').value || ''
         })
