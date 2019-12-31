@@ -208,6 +208,6 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 ```
 *remember this is local to your experience until you publish (DO NOT PUBLISH AN ALERT!!)*
 
-7. The alert will cause a pop up to appear on the screen, if it does not appear, check that your css is correct in your if statements. 
+7. The alert will cause a pop up to appear on the screen, if it does not appear, check that your css is correct in your if statements and that your event listener is in fact attached to the body of the DOM.
 
 
