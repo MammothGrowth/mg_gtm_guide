@@ -41,8 +41,8 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 
 1. Navigate to Tags >> 'MG - Attach Click Listener'
 * This code should look familiar:) This code attaches the click event listener and provides the block of code that should run upon click
-* MG - Track Calls is that block of code which we've stored as a Variable
 
+*MG - Attach Click Listener*
 ```javascript
     // Use events from https://developer.mozilla.org/en-US/docs/Web/Events
     var eventName = 'click';
@@ -52,6 +52,8 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
     var useCapture = true;
     el.addEventListener(eventName, {{MG - Click Events}}, useCapture);
 ```
+* MG - Track Calls is that block of code which we've stored as a Variable
+
 2. Navigate to Variables >> 'MG - Track Calls'
 * Because we've attached the 'click' event listener to the body of the document, we are going to check the element that was clicked against some elements that we want to track.
 * In this code, each if statement represents a unique track call that we want to make. The element the user clicked is stored in the variable clickEl, and we want to compare that element to some CSS to see if the clicked element is in fact the one we want to trigger a track call. IE. clickEl is the button a user clicked, and we want to compare that to the CSS of a button we want to track clicks of. 
@@ -87,8 +89,7 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 * For each type of [event](https://developer.mozilla.org/en-US/docs/Web/Events) that we want to track, we need to attach an event listener to listen for that event.
 * In this example, we'll be looking at form submits
 
-1. MG - Form Submits is that block of code which we've stored as a Variable
-
+*MG - Attach Submit Listener*
 ```javascript
     // Use events from https://developer.mozilla.org/en-US/docs/Web/Events
     var eventName = 'submit';
@@ -98,6 +99,8 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
     var useCapture = true;
     el.addEventListener(eventName, {{MG - Form Submits}}, useCapture);
 ```
+
+1. MG - Form Submits is that block of code which we've stored as a Variable
 2. Navigate to Variables >> 'MG - Identify Calls'
 * Similarly to before with the track calls, we're going to compare the form submission that triggers our event listener against a list of forms that we want to track. 
 * Forms typically have an ID which makes looking for them easier than working with classes as we did before. If you're unable to find a form id, you can still use classes and attributes to check which if block should fire. 
@@ -117,7 +120,7 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 
 *Finish*
 ```javascript
-    else if(clickEl.matches('#signup')){
+    else if(formEl.matches('#signup')){
         analytics.track('Signup Form Submitted', {
           'companySize':formEl.querySelector('.company-size').value || ''
         })
@@ -152,8 +155,32 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 ```
 
 2. Identify on form submit
-* 
+* If you don't have a user management system to generate a userId and building one isn't feasible, you can default to identifying users on form submit using their email. *This is not recommended*
+* To do this, simply edit *MG - Form Submits* to handle identify
 
+*Before*
+```javascript
+    else if(formEl.matches('#signup')){
+        analytics.track('Signup Form Submitted', {
+          'companySize':formEl.querySelector('.company-size').value || ''
+        })
+    }
+```
+
+*After*
+```javascript
+    else if(formEl.matches('#signup')){
+        analytics.identify({{email}},{
+          'firstName':{{firstName}},
+          'lastName':{{lastName}},
+          'email':{{email}}  
+        })
+        analytics.track('Signup Form Submitted', {
+          'companySize':formEl.querySelector('.company-size').value || ''
+        })
+    }
+```
+*It is important to note that the identify call should be made before making the track call*
 
 
 ### **Testing** 
