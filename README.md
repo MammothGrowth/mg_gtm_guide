@@ -52,9 +52,9 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
     var useCapture = true;
     el.addEventListener(eventName, {{MG - Click Events}}, useCapture);
 ```
-* MG - Track Calls is that block of code which we've stored as a Variable
+* MG - Click Events is that block of code which we've stored as a Variable
 
-2. Navigate to Variables >> 'MG - Track Calls'
+2. Navigate to Variables >> 'MG - Click Events'
 * Because we've attached the 'click' event listener to the body of the document, we are going to check the element that was clicked against some elements that we want to track.
 * In this code, each if statement represents a unique track call that we want to make. The element the user clicked is stored in the variable clickEl, and we want to compare that element to some CSS to see if the clicked element is in fact the one we want to trigger a track call. IE. clickEl is the button a user clicked, and we want to compare that to the CSS of a button we want to track clicks of. 
 * Each value with brackets needs to be replaced with the CSS of elements you want to track. Example below.
@@ -101,8 +101,8 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 ```
 
 1. MG - Form Submits is that block of code which we've stored as a Variable
-2. Navigate to Variables >> 'MG - Identify Calls'
-* Similarly to before with the track calls, we're going to compare the form submission that triggers our event listener against a list of forms that we want to track. 
+2. Navigate to Variables >> 'MG - Form Submits'
+* Similarly to before with MG - Click Events, we're going to compare the form submission that triggers our event listener against a list of forms that we want to track. 
 * Forms typically have an ID which makes looking for them easier than working with classes as we did before. If you're unable to find a form id, you can still use classes and attributes to check which if block should fire. 
 * [ID CSS Selector](https://www.w3schools.com/cssref/sel_id.asp) 
 
@@ -186,5 +186,27 @@ GTM splits this 'trigger' + 'callback' logic into 'triggers' and 'tags' respecti
 
 
 ### **Testing** 
+
+*Any changes made to your GTM workspace will be local to you until you publish the container*
+
+1. Once you're ready to test, click preview. 
+2. Open up your website and you should see a control panel at the bottom of your screen. *(If not give it a minute as it can take a bit to load)*
+3. Navigate through each of your funnels and check the left side of the preview control panel for the events that you want to track. They should appear as clicks etc and you'll need to find the specific one that corresponds to triggering the events you want to track. 
+4. Click on the event and check that the dataLayer variables are populated with the desired values
+5. Then check each of your destinations and determine if the events are populating
+6. If the events are not making it into your destinations and the dataLayer variables are populating, you may need to add an alert inside of the callback function ie MG - Click Events like so
+
+**Check with a developer before testing and do not publish**
+```javascript
+    else if((clickEl.matches('.cta-button'))||(clickEl.closest('.cta-wrapper'))){
+        alert('CTA Clicked')
+        analytics.track('CTA Clicked', {
+          // Edit so that the CTA text is always captured
+          'CTA':clickEl.closest('.cta-wrapper').textContent || ''
+        })
+    }
+```
+*remember this is local to your experience until you publish (DO NOT PUBLISH AN ALERT!!)
+7. The alert will cause a pop up to appear on the screen, if it does not appear, check that your css is correct in your if statements. 
 
 
